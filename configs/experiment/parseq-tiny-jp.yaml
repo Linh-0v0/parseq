@@ -1,0 +1,29 @@
+# @package _global_
+# PARSeq-Ti for Japanese license plate OCR
+# Charset: 252 chars (kanji, kana, digits, separators, alpha)
+# Reading order: top row L→R, then bottom row L→R
+defaults:
+  - override /model: parseq
+  - override /charset: 252_jp
+
+model:
+  name: parseq-tiny-jp
+  embed_dim: 192
+  enc_num_heads: 3
+  dec_num_heads: 6
+  img_size: [64, 128]
+  max_label_length: 16
+  # Context-free decoding — no LM refinement (plate serials are near-random)
+  decode_ar: false
+  refine_iters: 0
+  batch_size: 384
+
+data:
+  # CRITICAL: default is true, which runs .encode('ascii', 'ignore') and strips all kanji/kana
+  normalize_unicode: false
+  root_dir: data/lmdb
+  train_dir: synthetic
+
+trainer:
+  max_epochs: 100
+  devices: 1
