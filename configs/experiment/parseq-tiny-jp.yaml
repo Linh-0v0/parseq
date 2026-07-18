@@ -29,3 +29,5 @@ data:
 trainer:
   max_epochs: 100
   devices: 1
+  # Default 1000 exceeds our 124 batches/epoch (47.5k samples / batch 384)
+  val_check_interval: 1.0
