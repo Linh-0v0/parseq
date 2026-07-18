@@ -21,6 +21,8 @@ model:
 data:
   # CRITICAL: default is true, which runs .encode('ascii', 'ignore') and strips all kanji/kana
   normalize_unicode: false
+  # Synthetic data is already augmented by our degradation pipeline
+  augment: false
   root_dir: data/lmdb
   train_dir: synthetic
 
